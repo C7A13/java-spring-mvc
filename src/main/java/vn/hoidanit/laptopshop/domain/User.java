@@ -16,6 +16,8 @@ public class User {
     private String address;
     private String phone;
 
+    private String avatar;
+
     public long getId() {
         return id;
     }
@@ -62,6 +64,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override

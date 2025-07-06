@@ -22,6 +22,7 @@
             <body>
                 <div class="container mt-5">
                     <div class="row">
+
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h2>Table users</h2>
                             <a href="/admin/user/create" class="btn btn-primary">Create a User</a>
@@ -37,15 +38,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="user" items="${users1}">
+                                <c:forEach var="user" items="${users}">
                                     <tr>
                                         <td>${user.id}</td>
                                         <td>${user.email}</td>
                                         <td>${user.fullName}</td>
                                         <td>
-                                            <button class="btn btn-success btn-sm me-2">View</button>
-                                            <button class="btn btn-warning btn-sm me-2">Update</button>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                            <a href="/admin/user/${user.id}"
+                                                class="btn btn-success btn-sm me-2">View</a>
+                                            <a href="/admin/user/update/${user.id}"
+                                                class="btn btn-warning btn-sm me-2">Update</a>
+                                            <a href="/admin/user/delete/${user.id}"
+                                                class="btn btn-danger btn-sm me-2">Delete</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
