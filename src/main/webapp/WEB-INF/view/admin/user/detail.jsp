@@ -39,41 +39,27 @@
                                 <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                 <li class="breadcrumb-item active">User</li>
                             </ol>
+
                             <div class="mt-5">
                                 <div class="row">
-                                    <div class="col-12 max-auto">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h2>Table users</h2>
-                                            <a href="/admin/user/create" class="btn btn-primary">Create a User</a>
+                                    <div class="col-12 mx-auto">
+                                        <div class="d-flex justify-content-between">
+                                            <h2>Information Users ID : ${id}</h2>
                                         </div>
                                         <hr>
-                                        <table class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Email</th>
-                                                    <th>Full Name</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="user" items="${users}">
-                                                    <tr>
-                                                        <td>${user.id}</td>
-                                                        <td>${user.email}</td>
-                                                        <td>${user.fullName}</td>
-                                                        <td>
-                                                            <a href="/admin/user/${user.id}"
-                                                                class="btn btn-success btn-sm me-2">View</a>
-                                                            <a href="/admin/user/update/${user.id}"
-                                                                class="btn btn-warning btn-sm me-2">Update</a>
-                                                            <a href="/admin/user/delete/${user.id}"
-                                                                class="btn btn-danger btn-sm me-2">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                                        <div class="card" style="width: 60%;">
+                                            <div class="card-header">
+                                                User Information
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">ID : ${user.id}</li>
+                                                <li class="list-group-item">Email : ${user.email}</li>
+                                                <li class="list-group-item">FullName : ${user.fullName}</li>
+                                                <li class="list-group-item">Address :${user.address}</li>
+                                                <li class="list-group-item">Phone : ${user.phone}</li>
+                                            </ul>
+                                        </div>
+                                        <a href="/admin/user" class="btn btn-success mt-2"> Back</a>
                                     </div>
                                 </div>
                             </div>

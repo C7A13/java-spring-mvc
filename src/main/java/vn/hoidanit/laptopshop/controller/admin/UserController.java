@@ -1,10 +1,12 @@
-package vn.hoidanit.laptopshop.controller;
+package vn.hoidanit.laptopshop.controller.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
-import org.eclipse.tags.shaded.org.apache.regexp.recompile;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +15,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.service.UserService;
 
 @Controller
 public class UserController {
 
     private UserService userService;
+    private UploadService uploadService;
+    private PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -38,7 +47,15 @@ public class UserController {
     private String pageUser(Model model) {
         List<User> chan = this.userService.getAllUser();
         model.addAttribute("users", chan);
-        return "admin/user/table-user";
+        return "admin/user/show";
+    }
+
+    @RequestMapping("/admin/user/{id}")
+    private String getInformationUser(Model model, @PathVariable long id) {
+        User user = this.userService.getUserById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("id", id);
+        return "admin/user/detail";
     }
 
     @RequestMapping("/admin/user/create")
@@ -47,16 +64,15 @@ public class UserController {
         return "admin/user/create";
     }
 
-    @RequestMapping("/admin/user/{id}")
-    private String getInformationUser(Model model, @PathVariable long id) {
-        User user = this.userService.getUserById(id);
-        model.addAttribute("user", user);
-        model.addAttribute("id", id);
-        return "admin/user/show";
-    }
-
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    private String createUser(Model model, @ModelAttribute("newUser") User Chan) {
+    private String createUser(Model model, @ModelAttribute("newUser") User Chan,
+            @RequestParam("loadFile") MultipartFile file) {
+        String avatar = this.uploadService.handleSaveUpLoadFile(file, "avatar");
+        String hashPassword = this.passwordEncoder.encode(Chan.getPassword());
+
+        Chan.setAvatar(avatar);
+        Chan.setPassword(hashPassword);
+        Chan.setRole(this.userService.getRoleByName(Chan.getRole().getName()));
         this.userService.handleSaveUser(Chan);
         return "redirect:/admin/user";
     }
