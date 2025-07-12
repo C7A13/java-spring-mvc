@@ -20,6 +20,9 @@ public class UploadService {
     }
 
     public String handleSaveUpLoadFile(@RequestParam("loadFile") MultipartFile file, String targetFolder) {
+        if (file.isEmpty()) {
+            return "";
+        }
         String rootPath = this.servletContext.getRealPath("/resources/images");
         String avatarName = "";
         try {

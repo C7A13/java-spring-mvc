@@ -1,19 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-            <html lang="en">
 
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
-            </head>
-
-            <body>
-
-            </body>
-
-            </html>
             <!DOCTYPE html>
             <html lang="en">
 
@@ -62,12 +50,24 @@
                                         enctype="multipart/form-data">
                                         <div class="row mb-3">
                                             <div class="mb-3 col-12 col-md-6">
+                                                <c:set var="errorEmail">
+                                                    <form:errors path="email" />
+                                                </c:set>
                                                 <label for="email" class="form-label">Email:</label>
-                                                <form:input type="email" class="form-control" path="email" />
+                                                <form:input type="email"
+                                                    class="form-control ${not empty errorEmail? 'is-invalid' : ' ' } "
+                                                    path="email" />
+                                                <form:errors path="email" cssClass="invalid-feedback" />
                                             </div>
                                             <div class="mb-3 col-12 col-md-6">
+                                                <c:set var="errorPassword">
+                                                    <form:errors path="password" />
+                                                </c:set>
                                                 <label for="password" class="form-label">Password:</label>
-                                                <form:input type="password" class="form-control" path="password" />
+                                                <form:input type="password"
+                                                    class="form-control ${not empty errorPassword? 'is-invalid' : ' ' } "
+                                                    path="password" />
+                                                <form:errors path="password" cssClass="invalid-feedback" />
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -76,8 +76,14 @@
                                                 <form:input type="tel" class="form-control" path="phone" />
                                             </div>
                                             <div class="mb-3 col-12 col-md-6">
+                                                <c:set var="errorFullName">
+                                                    <form:errors path="fullName" />
+                                                </c:set>
                                                 <label for="fullName" class="form-label">Full Name:</label>
-                                                <form:input type="text" class="form-control" path="fullName" />
+                                                <form:input type="text"
+                                                    class="form-control ${not empty errorFullName? 'is-invalid' : ' ' } "
+                                                    path="fullName" />
+                                                <form:errors path="fullName" cssClass="invalid-feedback" />
                                             </div>
                                         </div>
                                         <div class="mb-3">

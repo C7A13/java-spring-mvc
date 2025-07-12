@@ -1,18 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <html lang="en">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-        </head>
-
-        <body>
-
-        </body>
-
-        </html>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -57,6 +45,7 @@
                                                 <li class="list-group-item">FullName : ${user.fullName}</li>
                                                 <li class="list-group-item">Address :${user.address}</li>
                                                 <li class="list-group-item">Phone : ${user.phone}</li>
+                                                <li class="list-group-item">Role : ${user.role.name}</li>
                                             </ul>
                                         </div>
                                         <a href="/admin/user" class="btn btn-success mt-2"> Back</a>

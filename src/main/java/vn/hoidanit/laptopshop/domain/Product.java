@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -13,12 +16,25 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
+    @Size(min = 1, message = "Chưa nhập tên của laptop !")
     private String name;
+
+    @NotNull
+    @Min(value = 100, message = "Chưa nhập giá của laptop (Tối thiểu = 100) !")
     private double price;
+
     private String image;
+
+    @NotNull
+    @Size(min = 1, message = "Chưa nhập mô tả cho laptop !")
     private String detailDesc;
-    private String sortDesc;
+    private String shortDesc;
+
+    @NotNull
+    @Min(value = 1, message = "Giá trị tối thiểu bằng 1 !")
     private long quantity;
+
     private long sold;
     private String factory;
 
@@ -62,12 +78,12 @@ public class Product {
         this.detailDesc = detailDesc;
     }
 
-    public String getSortDesc() {
-        return sortDesc;
+    public String getShortDesc() {
+        return shortDesc;
     }
 
-    public void setSortDesc(String sortDesc) {
-        this.sortDesc = sortDesc;
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
     }
 
     public long getQuantity() {
@@ -107,7 +123,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", detailDesc="
-                + detailDesc + ", sortDesc=" + sortDesc + ", quantity=" + quantity + ", sold=" + sold + ", factory="
+                + detailDesc + ", shortDesc=" + shortDesc + ", quantity=" + quantity + ", sold=" + sold + ", factory="
                 + factory + ", target=" + target + "]";
     }
 

@@ -1,18 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <html lang="en">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-        </head>
-
-        <body>
-
-        </body>
-
-        </html>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -53,6 +41,7 @@
                                                     <th>ID</th>
                                                     <th>Email</th>
                                                     <th>Full Name</th>
+                                                    <th>Role</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -62,6 +51,7 @@
                                                         <td>${user.id}</td>
                                                         <td>${user.email}</td>
                                                         <td>${user.fullName}</td>
+                                                        <td>${user.role.name}</td>
                                                         <td>
                                                             <a href="/admin/user/${user.id}"
                                                                 class="btn btn-success btn-sm me-2">View</a>
